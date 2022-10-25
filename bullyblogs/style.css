@@ -1,0 +1,200 @@
+/* Header CSS */
+
+.form-control-dark {
+  border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
+
+.b-example-vr {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 100vh;
+}
+
+.bi {
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.maroon-style{
+  background-color: #800 !important;
+  color: white !important;
+}
+
+body{
+  background-color: #f5f5f5;
+}
+
+.mobile{
+  display: none !important;
+}
+
+/* Recomendations */
+
+.tag{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 992px) {
+  .mobile{
+    display: block !important;
+  }
+  .desktop{
+    display: none !important;
+  }
+}
+
+/* Home Page */
+
+@media (min-width: 992px) {
+  .rounded-lg-3 { border-radius: .3rem; }
+}
+
+#side-bar{
+  display: none;
+  width: 280px; 
+  background: black; 
+  position:absolute; 
+  z-index: 1;
+  height: 100vh; 
+  top: 0; 
+  left:0;
+}
+
+.recommendations{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.title-header{
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.about-card{
+  margin-top: 25px;
+}
+
+.card-text{
+  margin-top: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  align-self: center;
+}
+
+/* Login and Sign Up */
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  padding-top: 150px;
+  min-height: 70vh;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-spacing-top{
+  margin-top: 100px;
+}
+
+.form-title-spacing{
+  margin-top: 50px;
+}
+
+.btn-spacing{
+  margin-top: 15px;
+}
+
+/* Profile */
+
+.name-location, .item-spacing{
+  padding: 25px;
+}
+
+.description{
+  margin: 25px;
+}
+
+.contact-info{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.max-height-400{
+  max-height: 400px;
+}
+
+@media (max-width: 992px) {
+  .max-height-400{
+    max-height: none;
+  }
+}
