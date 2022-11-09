@@ -198,3 +198,9 @@ body{
     max-height: none;
   }
 }
+
+/* Create Blog */
+
+.space-top{
+  margin-top: 25px;
+}
