@@ -5,15 +5,17 @@
 
 <body>
   <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 100px;">
       <form>
         <div class="form-group">
-          <label for="exampleFormControlInput1" class="space-top">Name</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-          <label for="exampleFormControlInput1" class="space-top">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-          <label for="exampleFormControlInput1" class="space-top">Date</label>
-          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          <label for="Name" class="space-top">Name</label>
+          <input type="text" class="form-control" id="Name" placeholder="Name">
+          <label for="Title" class="space-top">Title</label>
+          <input type="text" class="form-control" id="Title" placeholder="Title">
+          <label for="Email" class="space-top">Email address</label>
+          <input type="email" class="form-control" id="Email" placeholder="Email">
+          <label for="Date" class="space-top">Date</label>
+          <input type="date" class="form-control" id="Date">
         </div>
         <div class="form-group space-top">
           <label for="exampleFormControlTextarea1">Description</label>
@@ -27,7 +29,6 @@
   <script>
     tinymce.init({
       selector: 'textarea',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
