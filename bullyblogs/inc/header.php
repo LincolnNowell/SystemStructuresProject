@@ -19,22 +19,23 @@
 
     <div class="d-flex justify-content-end">
       <?php
-      $signedIn = false;
-      if ($signedIn) {
+      session_start();
+      if (!empty($_SESSION['name'])) {
         echo '<div class="flex-shrink-0 dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
-            <img src="https://avatars.githubusercontent.com/u/45523380?s=400&u=55e0c467808188a79dbe4c55bd789d0db24b2d78&v=4" alt="mdo" width="32" height="32" class="rounded-circle">
+            <img src="./imgs/bootstrap-themes.png" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small shadow show" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34px, 0px);">
             <li><a class="dropdown-item" href="#">New blog...</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="process.php?route=sign-out">Sign out</a></li>
           </ul>
         </div>';
       } else {
-        echo '<a class="btn btn-secondary" href="signup.php">Sign Up</a>';
+        echo '<a class="btn btn-secondary" href="signup.php">Sign Up</a> &nbsp;';
+        echo '<a class="btn btn-secondary" href="login.php">Sign In</a>';
       }
       ?>
     </div>

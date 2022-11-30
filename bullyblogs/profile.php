@@ -4,14 +4,29 @@
 <?php include './inc/sidebar.php'; ?>
 
 <?php 
-    $stmt = $dbh->query("SELECT * FROM `users` WHERE `username`='" . $_GET['email'] . "' LIMIT 1");
+    $stmt = $dbh->query("SELECT * FROM `users` WHERE `email`='" . $_SESSION["email"] . "' LIMIT 1");
     $row = $stmt->fetch();
-    echo $row['id'];
-    $stmt2 = $dbh->query("SELECT * FROM `posts` WHERE `user_id`='". $row['id'] ."'");
-    $row2 = $stmt2->fetch();
-    echo $row2['title'];
+    $_SESSION['user_id'] = $row['id'];
     $name = $row['name'];
-    $email = $row['username'];
+    $email = $row['email'];
+    $phone = $row['phone'];
+
+    function loadCards($title, $date, $desc){
+        echo '<div class="card mb-3 max-height-400">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">'. $title .'</h5>
+                    <p class="card-text">'. $desc .'</p>
+                    <p class="card-text"><small class="text-muted">Uploaded '. $date . '</small></p>
+                </div>
+            </div>
+        </div>
+    </div>';
+    }
 ?>
 
 <body>
@@ -29,7 +44,7 @@
                         </svg> <?php echo $email; ?></a>
                     <a href="/#" style="margin-top: 25px; text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
-                        </svg> (123) 456-7891</a>
+                        </svg> <?php echo $phone; ?></a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -38,7 +53,7 @@
                     <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                             <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
                         </svg> Location</p>
-                    <a type="button" href="./create_blog.php" class="btn maroon-style"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <a type="button" href='./create_blog.php' class="btn maroon-style"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
                         </svg> Create Post</a>
@@ -62,74 +77,26 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade item-spacing show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <div class="card mb-3 max-height-400">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php 
+                            $stmt2 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'product' AND `user_id`='". $row['id'] ."'");
+                            while ($products = $stmt2->fetch()) {
+                                loadCards($products['title'], $products['date'], $products['description']);
+                            }
+                        ?>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                        <div class="tab-pane fade item-spacing show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                            <div class="card mb-3 max-height-400">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php 
+                            $stmt3 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'event' AND `user_id`='". $row['id'] ."'");
+                            while ($events = $stmt3->fetch()) {
+                                loadCards($events['title'], $events['date'], $events['description']);
+                            }
+                        ?>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                        <div class="tab-pane fade item-spacing show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                            <div class="card mb-3 max-height-400">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
-                        <div class="tab-pane fade item-spacing show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                            <div class="card mb-3 max-height-400">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

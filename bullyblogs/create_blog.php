@@ -6,20 +6,29 @@
 <body>
   <div class="container">
     <div class="row" style="margin-top: 100px;">
-      <form>
+      <form action="process.php?route=blog" method="POST">
         <div class="form-group">
-          <label for="Name" class="space-top">Name</label>
-          <input type="text" class="form-control" id="Name" placeholder="Name">
           <label for="Title" class="space-top">Title</label>
-          <input type="text" class="form-control" id="Title" placeholder="Title">
-          <label for="Email" class="space-top">Email address</label>
-          <input type="email" class="form-control" id="Email" placeholder="Email">
-          <label for="Date" class="space-top">Date</label>
-          <input type="date" class="form-control" id="Date">
+          <input type="text" class="form-control" id="Title" placeholder="Title" name="title">
+          <label for="category" class="space-top" id="category" placeholder="category">Category</label>
+          <div class="form-check space-top">
+            <input class="form-check-input" type="radio" name="category" id="flexRadioDefault1" value="product">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Product
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category" id="flexRadioDefault2" value="event">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Event
+            </label>
+          </div>
+          <label for="Email" class="space-top">Date</label>
+          <input type="date" class="form-control" id="Date" name="date">
         </div>
         <div class="form-group space-top">
           <label for="exampleFormControlTextarea1">Description</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
         </div>
         <button type="submit" class="btn maroon-style space-top">Post</button>
       </form>

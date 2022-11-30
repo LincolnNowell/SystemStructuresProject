@@ -7,6 +7,9 @@
       <a class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-3" href="./index.php">
         Home
       </a>
+      <a class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fs-3" href="./marketplace.php">
+        Marketplace
+      </a>
     </li>
   </ul>
 </div>

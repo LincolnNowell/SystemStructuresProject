@@ -18,6 +18,10 @@
         <label for="floatingInput">Name</label>
       </div>
       <div class="form-floating">
+        <input type="tel" class="form-control" id="floatingInput" name="phone" placeholder="phone" required>
+        <label for="floatingInput">Phone</label>
+      </div>
+      <div class="form-floating">
         <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
         <label for="floatingInput">Email address</label>
       </div>
