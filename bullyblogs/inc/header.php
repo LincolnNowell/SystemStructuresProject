@@ -1,3 +1,5 @@
+<?php include 'connect.php' ?>
+
 <header class="py-3 mb-3 border-bottom maroon-style">
   <!-- Put grid template columns in seperate css and make mobile style -->
   <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr .5fr;">
@@ -17,7 +19,7 @@
 
     <div class="d-flex justify-content-end">
       <?php
-      $signedIn = true;
+      $signedIn = false;
       if ($signedIn) {
         echo '<div class="flex-shrink-0 dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">
@@ -32,7 +34,7 @@
           </ul>
         </div>';
       } else {
-        echo '<button type="button" class="btn btn-secondary">Sign Up</button>';
+        echo '<a class="btn btn-secondary" href="signup.php">Sign Up</a>';
       }
       ?>
     </div>

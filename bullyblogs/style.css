@@ -173,6 +173,10 @@ body{
   margin-top: 15px;
 }
 
+.password-alert, .email-alert, .taken-alert{
+  display: none;
+}
+
 /* Profile */
 
 .name-location, .item-spacing{
@@ -204,3 +208,6 @@ body{
 .space-top{
   margin-top: 25px;
 }
+
+/* Marketplace */
+
