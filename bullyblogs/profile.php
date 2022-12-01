@@ -1,6 +1,5 @@
 <?php include './inc/head.php'; ?>
 <?php include './inc/header.php'; ?>
-<?php include './inc/tags.php'; ?>
 <?php include './inc/sidebar.php'; ?>
 
 <?php
@@ -94,13 +93,22 @@ function loadCards($title, $date, $desc)
                         ?>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-
+                        <?php
+                        $stmt4 = $dbh->query("SELECT * FROM `likes` WHERE `user_id`='" . $row['id'] . "'");
+                        while ($likes = $stmt4->fetch()) {
+                            $likeStmt = $dbh->query("SELECT * FROM `posts` WHERE `id`=". $likes['liked_id'] ." LIMIT 1");
+                            $likeResult = $likeStmt->fetch();
+                            loadCards($likeResult['title'],$likeResult['date'],$likeResult['description']);
+                        }
+                        ?>
                     </div>
                     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
                         <?php
                         $stmt5 = $dbh->query("SELECT * FROM `reviews` WHERE `user_id`='" . $row['id'] . "'");
                         while ($reviews = $stmt5->fetch()) {
-                            loadCards($events['title'], $events['date'], $events['description']);
+                            $reviewStmt = $dbh->query("SELECT * FROM `posts` WHERE `id`=". $reviews['reviewed_id'] ." LIMIT 1");
+                            $reviewResult = $reviewStmt->fetch();
+                            loadCards($reviewResult['title'],$reviewResult['date'],$reviewResult['description']);
                         }
                         ?>
                     </div>

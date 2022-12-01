@@ -1,6 +1,5 @@
 <?php include './inc/head.php'; ?>
 <?php include './inc/header.php'; ?>
-<?php include './inc/tags.php'; ?>
 <?php include './inc/sidebar.php'; ?>
 
 <body class="text-center">

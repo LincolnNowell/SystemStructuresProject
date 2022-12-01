@@ -1,6 +1,5 @@
 <?php include './inc/head.php'; ?>
 <?php include './inc/header.php'; ?>
-<?php include './inc/tags.php'; ?>
 <?php include './inc/sidebar.php'; ?>
 
 <body>
@@ -34,7 +33,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">' . $cards['title'] . '</h5>
                                 <p class="card-text">' . $cards['description'] . '</p>
-                                <a href="article.php?postid='. $cards['id'] .'" class="btn btn-primary">Read</a>
+                                <a href="article.php?postid='. $cards['user_id'] .'&article_id='. $cards['id'] .'" class="btn btn-primary">Read</a>
                             </div>
                         </div>';
                     }

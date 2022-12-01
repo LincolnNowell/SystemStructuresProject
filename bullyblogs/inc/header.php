@@ -13,13 +13,12 @@
 
     <div class="d-flex align-items-center">
       <form class="w-100 me-3" role="search">
-        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+
       </form>
     </div>
 
     <div class="d-flex justify-content-end">
       <?php
-      session_start();
       if (!empty($_SESSION['name'])) {
         echo '<div class="flex-shrink-0 dropdown">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true">

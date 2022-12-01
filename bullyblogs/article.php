@@ -1,16 +1,15 @@
 <?php include './inc/head.php'; ?>
 <?php include './inc/header.php'; ?>
-<?php include './inc/tags.php'; ?>
 <?php include './inc/sidebar.php'; ?>
 
 <?php
-$sql = 'SELECT * FROM `posts` WHERE `id`=' . $_GET['postid'] . ' LIMIT 1';
+$sql = 'SELECT * FROM `posts` WHERE `id`=' . $_GET['article_id'] . ' LIMIT 1';
 $sth = $dbh->query($sql);
 $result = $sth->fetch();
 $sql2 = 'SELECT * FROM `users` WHERE `id`=' . $result['user_id'] . ' LIMIT 1';
 $sth2 = $dbh->query($sql2);
 $result2 = $sth2->fetch();
-$_SESSION['current_article_id'] = $_GET['postid'];
+$_SESSION['current_article_id'] = $_GET['article_id'];
 ?>
 
 <body>
@@ -18,10 +17,9 @@ $_SESSION['current_article_id'] = $_GET['postid'];
         <h1><?php echo $result['title'] ?></h1>
         <h3>By <?php echo $result2['name'] ?></h3>
         <?php
-        $sql3 = 'SELECT * FROM `likes` WHERE `user_id`=' . $result['user_id'] . ' AND `liked_id`=' . $_GET['postid'] . ' LIMIT 1';
+        $sql3 = 'SELECT * FROM `likes` WHERE `user_id`=' . $_SESSION['user_id'] . ' AND `liked_id`=' . $_GET['article_id'] . '';
         $sth3 = $dbh->query($sql3);
         $result3 = $sth3->fetch();
-        echo $result3['user_id'];
         if (!empty($result3)) {
             echo '<a href="process.php?route=like&status=unlike"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill maroon-heart" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
@@ -42,7 +40,7 @@ $_SESSION['current_article_id'] = $_GET['postid'];
         </form>
         <h2 style="text-align: center;">Review</h2>
         <?php
-            $reviewsSql = "SELECT * FROM `reviews` WHERE `reviewed_id`=". $_GET['postid'] ."";
+            $reviewsSql = "SELECT * FROM `reviews` WHERE `reviewed_id`=". $_GET['article_id'] ."";
             $sth_review = $dbh->query($reviewsSql);
             while($result4 = $sth_review->fetch()){
                 echo $result4['review_text'];
