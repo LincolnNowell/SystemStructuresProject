@@ -211,3 +211,18 @@ body{
 
 /* Marketplace */
 
+
+
+/* Article */
+
+.article-text{
+  margin-top: 50px;
+}
+
+.maroon-heart{
+  color: #800 !important;
+}
+
+.unliked{
+  color: #fff !important;
+}

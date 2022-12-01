@@ -56,6 +56,32 @@ function AddPost(&$dbh,$cat,$title,$date,$desc,$id){
     }
 }
 
+function AddLike(&$dbh, $user_id,$article_id){
+    $alreadyLikedSql = "SELECT * FROM `likes` WHERE `user_id`=". $user_id ." AND `liked_id`=". $article_id ."";
+    $sth3 = $dbh->query($alreadyLikedSql);
+    $sql2 = "SELECT * FROM `posts` WHERE `id`=". $article_id ." LIMIT 1";
+    $sth2 = $dbh->query($sql2);
+    $postResult = $sth2->fetch();
+    if(!empty($postResult)){
+        $updateSql = "UPDATE `posts` SET likes= ? WHERE `id`=? LIMIT 1";
+        $stmt = $dbh->prepare($updateSql);
+        $stmt->execute([$postResult['likes'] + 1, $article_id]);
+    }
+    $sql = "INSERT INTO `likes` (`id`, `user_id`, `liked_id`) VALUES (NULL,?,?)";
+    $sth = $dbh->prepare($sql);
+    if($sth->execute([$user_id, $article_id])){
+        header("location: article.php?postid=". $article_id ."");
+    }
+}
+
+function AddReview(&$dbh, $user_id ,$article_id, $review){
+    $sql = "INSERT INTO `reviews` (`id`, `user_id`, `reviewed_id`, `review_text`) VALUES (NULL,?,?,?)";
+    $sth = $dbh->prepare($sql);
+    if($sth->execute([$user_id, $article_id, $review])){
+        header("location: article.php?postid=". $article_id ."");
+    }
+}
+
 
 $route = $_GET['route'];
 
@@ -76,6 +102,19 @@ switch ($route) {
         session_start();
         session_destroy();
         header('location: index.php');
+    break;
+    case 'like':
+        session_start();
+        $articleId = $_SESSION['current_article_id'];
+        $userId =  $_SESSION['user_id'];
+        AddLike($dbh, $userId, $articleId);
+    break;
+    case 'review':
+        session_start();
+        $id = $_SESSION['user_id'];
+        $review = $_POST['review'];
+        $articleId = $_SESSION['current_article_id'];
+        AddReview($dbh,$id,$articleId,$review);
     break;
     case 'blog':
         session_start();

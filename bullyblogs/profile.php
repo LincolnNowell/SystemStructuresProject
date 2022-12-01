@@ -3,30 +3,31 @@
 <?php include './inc/tags.php'; ?>
 <?php include './inc/sidebar.php'; ?>
 
-<?php 
-    $stmt = $dbh->query("SELECT * FROM `users` WHERE `email`='" . $_SESSION["email"] . "' LIMIT 1");
-    $row = $stmt->fetch();
-    $_SESSION['user_id'] = $row['id'];
-    $name = $row['name'];
-    $email = $row['email'];
-    $phone = $row['phone'];
+<?php
+$stmt = $dbh->query("SELECT * FROM `users` WHERE `email`='" . $_SESSION["email"] . "' LIMIT 1");
+$row = $stmt->fetch();
+$_SESSION['user_id'] = $row['id'];
+$name = $row['name'];
+$email = $row['email'];
+$phone = $row['phone'];
 
-    function loadCards($title, $date, $desc){
-        echo '<div class="card mb-3 max-height-400">
+function loadCards($title, $date, $desc)
+{
+    echo '<div class="card mb-3 max-height-400">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="./imgs/bootstrap-themes.png" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">'. $title .'</h5>
-                    <p class="card-text">'. $desc .'</p>
-                    <p class="card-text"><small class="text-muted">Uploaded '. $date . '</small></p>
+                    <h5 class="card-title">' . $title . '</h5>
+                    <p class="card-text">' . $desc . '</p>
+                    <p class="card-text"><small class="text-muted">Uploaded ' . $date . '</small></p>
                 </div>
             </div>
         </div>
     </div>';
-    }
+}
 ?>
 
 <body>
@@ -77,26 +78,31 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade item-spacing show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <?php 
-                            $stmt2 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'product' AND `user_id`='". $row['id'] ."'");
-                            while ($products = $stmt2->fetch()) {
-                                loadCards($products['title'], $products['date'], $products['description']);
-                            }
+                        <?php
+                        $stmt2 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'product' AND `user_id`='" . $row['id'] . "'");
+                        while ($products = $stmt2->fetch()) {
+                            loadCards($products['title'], $products['date'], $products['description']);
+                        }
                         ?>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                        <?php 
-                            $stmt3 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'event' AND `user_id`='". $row['id'] ."'");
-                            while ($events = $stmt3->fetch()) {
-                                loadCards($events['title'], $events['date'], $events['description']);
-                            }
+                        <?php
+                        $stmt3 = $dbh->query("SELECT * FROM `posts` WHERE `category` LIKE 'event' AND `user_id`='" . $row['id'] . "'");
+                        while ($events = $stmt3->fetch()) {
+                            loadCards($events['title'], $events['date'], $events['description']);
+                        }
                         ?>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
 
                     </div>
                     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
-
+                        <?php
+                        $stmt5 = $dbh->query("SELECT * FROM `reviews` WHERE `user_id`='" . $row['id'] . "'");
+                        while ($reviews = $stmt5->fetch()) {
+                            loadCards($events['title'], $events['date'], $events['description']);
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
